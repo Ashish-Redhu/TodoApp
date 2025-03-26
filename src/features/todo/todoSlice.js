@@ -1,9 +1,9 @@
 import {createSlice, nanoid} from '@reduxjs/toolkit';
-
+import { toast } from "react-toastify";
 //1. The below one is the actual store/data but related to a particular feature only. 
 // In project there could be multiple features, so we will create multiple slices for them and we know very well slice is basically used to store data variable/states and methods that work on that data. 
 const initialState = {
-    todos: [{id: '1', title: 'todo1'}],
+    todos: [],
     gisEditing: false,
     gEditingId: null,
     gEditingTitle: ''
@@ -25,6 +25,13 @@ const todoSlice = createSlice({
         // the method always have the access of "state"/current state of the slice. 
         // And, the action is the data/object that we pass from component to the reducer method. So, that changes can be made in database/state of slice.
         addTodo: (state, action) =>{
+            if (action.payload.length <= 2) {
+                toast.error("Todo title must be longer than 2 characters!", {
+                    position: "top-center",
+                    autoClose: 3000, // Closes after 3s
+                });
+                return;
+            }
             const todo = {
                 id: nanoid(),
                 title: action.payload
@@ -36,6 +43,13 @@ const todoSlice = createSlice({
             state.todos = state.todos.filter(todo => todo.id !== id)
         },
         editTodo: (state, action) =>{
+            if (action.payload.title.length <= 2) {
+                toast.error("Todo title must be longer than 2 characters!", {
+                    position: "top-center",
+                    autoClose: 3000, // Closes after 3s
+                });
+                return;
+            }
             const {id, title} = action.payload;
             const todo = state.todos.find(todo => todo.id === id);
             if(todo){
