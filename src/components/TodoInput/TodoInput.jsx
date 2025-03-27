@@ -58,7 +58,7 @@ function TodoInput() {
         <div className="flex flex-col sm:flex-row items-center justify-between m-2">
           <div className='border-b border-teal-500 py-2 w-full'>
             <input 
-              class="appearance-none bg-transparent w-full md:w-96 lg:w-[500px] text-gray-700 py-1 px-2 leading-tight focus:outline-none" 
+              class="appearance-none bg-transparent w-full md:w-96 lg:w-[500px] text-gray-400 py-1 px-2 leading-tight focus:outline-none" 
                 type="text" 
                 placeholder="Enter todo..." 
                 aria-label="Todo" 

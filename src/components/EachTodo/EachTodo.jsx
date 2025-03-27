@@ -19,26 +19,13 @@ function EachTodo({id, title}) {
 
 
   return (
-    <>
-        <div style={
-            {
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '10px',
-                border: '1px solid red',
-                margin: '5px'
-            }
-        }>
-            <h3>{title}</h3>
-            {
-                gisEditing ? 'Editing' : 
-                <button onClick={handleEditClick}>Edit</button>
-            }
-            
-            <button onClick={handleDeleteClick}>Delete</button>
-        </div>
-    </>
+      <div className='flex flex-col sm:flex-row justify-between items-center p-2 rounded-md w-full break-words overflow-auto bg-gray-500 shadow-md mb-2'>
+          <h3 className='flex-1 mr-4 whitespace-pre-wrap break-words overflow-auto max-h-60 mb-4 sm:mb-0'>{title}</h3>
+          <div className='flex gap-2'>
+            { gisEditing ? "Editing" : <button className='px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600' onClick={handleEditClick}>Edit</button>}
+            <button className='px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600' onClick={handleDeleteClick}>Delete</button>
+          </div>
+      </div>
   )
 }
 
