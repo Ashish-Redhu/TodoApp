@@ -38,8 +38,8 @@ function EachTodo({id, title, isEditing}) {
             <p className='text-sm  text-gray-700 font-bold'>Completed</p>
             :
             <div className='flex gap-2 ml-1'>
-            { isEditing ? "Editing" : <button className='px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600' onClick={handleEditClick}>Edit</button>}
-            <button className='px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600' onClick={handleDeleteClick}>Delete</button>
+            { isEditing ? "Editing" : <button className='px-3 py-1 !bg-blue-500 text-white rounded-md !hover:bg-blue-600' onClick={handleEditClick}>Edit</button>}
+            <button className='px-3 py-1 !bg-red-500 text-white rounded-md !hover:bg-red-600' onClick={handleDeleteClick}>Delete</button>
           </div>
 
            }
