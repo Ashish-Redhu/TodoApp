@@ -34,7 +34,8 @@ const todoSlice = createSlice({
             }
             const todo = {
                 id: nanoid(),
-                title: action.payload
+                title: action.payload, 
+                isEditing: false, 
             }
             state.todos.push(todo)     // Here we have updated the state/data of slice.
             toast.success("Todo added successfully!", {
@@ -44,7 +45,16 @@ const todoSlice = createSlice({
         }, 
         removeTodo: (state, action) =>{
             const {id} = action.payload;
-            state.todos = state.todos.filter(todo => todo.id !== id)
+            const todo = state.todos.find(todo => todo.id === id);
+            if(todo.isEditing){
+                toast.error("You cannot delete a todo while editing!", {
+                    position: "top-center",
+                    autoClose: 3000, // Closes after 3s
+                });
+            }
+            else{
+                state.todos = state.todos.filter(todo => todo.id !== id)
+            } 
         },
         editTodo: (state, action) =>{
             if (action.payload.title.trim().length <= 2) {
@@ -65,6 +75,8 @@ const todoSlice = createSlice({
             const todo = state.todos.find(todo => todo.id === id);
             if (todo) {
                 state.gisEditing = !state.gisEditing; 
+                todo.isEditing = !todo.isEditing; 
+
                 if (state.gisEditing) {
                     state.gEditingTitle = todo.title; 
                     state.gEditingId = id;

@@ -7,7 +7,7 @@ function TodosList() {
     <div>
     {
       todos.map((todo, index) =>
-         <EachTodo key={index} id={todo.id} title={todo.title} 
+         <EachTodo key={index} id={todo.id} title={todo.title} isEditing={todo.isEditing} 
       />)
     }
     </div>

@@ -57,14 +57,23 @@ function TodoInput() {
       <form className="w-full" onSubmit={handleSubmit}>
         <div className="flex flex-col sm:flex-row items-center justify-between m-2">
           <div className='border-b border-teal-500 py-2 w-full'>
-            <input 
+            {/* <input 
               class="appearance-none bg-transparent w-full md:w-96 lg:w-[500px] text-gray-400 py-1 px-2 leading-tight focus:outline-none" 
                 type="text" 
                 placeholder="Enter todo..." 
                 aria-label="Todo" 
                 value={title}  
                 onChange={(e)=>setTitle(e.target.value)}
-              />
+              /> */}
+
+          <textarea 
+            className="appearance-none bg-transparent w-full md:w-96 lg:w-[500px] text-gray-400 py-1 px-2 leading-tight focus:outline-none resize-none overflow-x-hidden min-h-[3rem] max-h-[12rem]"
+            placeholder="Enter todo..." 
+            aria-label="Todo" 
+            value={title}  
+            onChange={(e) => setTitle(e.target.value)}
+            rows={1} 
+          />
           </div>
           <div className='flex flex-row justify-center items-center w-full sm:w-auto gap-2 m-2'>
             {
