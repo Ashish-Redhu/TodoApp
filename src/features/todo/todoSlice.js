@@ -25,7 +25,7 @@ const todoSlice = createSlice({
         // the method always have the access of "state"/current state of the slice. 
         // And, the action is the data/object that we pass from component to the reducer method. So, that changes can be made in database/state of slice.
         addTodo: (state, action) =>{
-            if (action.payload.length <= 2) {
+            if (action.payload.trim().length <= 2) {
                 toast.error("Todo title must be longer than 2 characters!", {
                     position: "top-center",
                     autoClose: 3000, // Closes after 3s
@@ -36,14 +36,18 @@ const todoSlice = createSlice({
                 id: nanoid(),
                 title: action.payload
             }
-            state.todos.push(todo)     // Here we have updated the state/data of slice. 
+            state.todos.push(todo)     // Here we have updated the state/data of slice.
+            toast.success("Todo added successfully!", {
+                position: "top-center",
+                autoClose: 3000,  // Closes after 3 seconds
+            }); 
         }, 
         removeTodo: (state, action) =>{
             const {id} = action.payload;
             state.todos = state.todos.filter(todo => todo.id !== id)
         },
         editTodo: (state, action) =>{
-            if (action.payload.title.length <= 2) {
+            if (action.payload.title.trim().length <= 2) {
                 toast.error("Todo title must be longer than 2 characters!", {
                     position: "top-center",
                     autoClose: 3000, // Closes after 3s
@@ -59,11 +63,8 @@ const todoSlice = createSlice({
         toggleEdit: (state, action) =>{
             const {id} = action.payload;
             const todo = state.todos.find(todo => todo.id === id);
-            // console.log("Hii");
-            // console.log(todo);
             if (todo) {
                 state.gisEditing = !state.gisEditing; 
-                // console.log("HELLO");
                 if (state.gisEditing) {
                     state.gEditingTitle = todo.title; 
                     state.gEditingId = id;

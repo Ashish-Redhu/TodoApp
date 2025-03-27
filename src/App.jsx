@@ -7,14 +7,14 @@ import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
-    <>
+    <div className='w-full sm:w-full sm:m-0'>
       <h1>Todo App using Redux</h1>
       <hr />
       <TodoInput />
       <TodosList />
       <ToastContainer /> 
       {/* Toastcontainer is used to show good quality notifications. */}
-    </>
+    </div>
   )
 }
 
