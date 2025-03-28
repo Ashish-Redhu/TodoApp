@@ -30,7 +30,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: "#2C2C2C";
-  background: url('/public/images/appbackground.png') no-repeat center center fixed;
+  background: url('/images/appbackground.png') no-repeat center center fixed;
   background-size: cover;
 }
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addTodo, toggleEdit, editTodo } from '../../features/todo/todoSlice'
+import { addTodo, disableEdit, editTodo } from '../../features/todo/todoSlice'
 
 function TodoInput() {
   const [title, setTitle] = useState('')
@@ -30,11 +30,10 @@ function TodoInput() {
       title: title
     }))
     
-    dispatch(toggleEdit({
+    dispatch(disableEdit({
       id: gEditingId,
-      title: title
     }))
-    setTitle('')
+    setTitle('');
   }
   const handleCancel = (e) =>{  
     e.preventDefault();
@@ -67,7 +66,7 @@ function TodoInput() {
               /> */}
 
           <textarea 
-            className="appearance-none bg-transparent w-full md:w-96 lg:w-[500px] text-gray-300 text-xl py-1 px-2 leading-tight focus:outline-none resize-none overflow-x-hidden min-h-[3rem] max-h-[12rem]"
+            className="appearance-none bg-transparent w-full md:w-96 lg:w-[500px] text-gray-200 text-xl py-1 px-2 leading-tight focus:outline-none resize-none overflow-x-hidden min-h-[3rem] max-h-[12rem]"
             placeholder="Enter todo..." 
             aria-label="Todo" 
             value={title}  

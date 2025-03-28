@@ -1,15 +1,21 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeTodo, toggleEdit} from '../../features/todo/todoSlice';
+import { removeTodo, enableEdit, markAsDone} from '../../features/todo/todoSlice';
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 function EachTodo({id, title, isEditing}) {
   const dispatch = useDispatch();
 
- const [isChecked, setIsChecked] = React.useState(false);
+//  const [isChecked, setIsChecked] = React.useState(false);
+  const isDone = useSelector((state) => {
+    const todo = state.todos.find((todo) => todo.id === id);
+    return todo ? todo.isDone : false; // Return the isChecked value or false if not found
+  });
  const handleCheckboxChange = (event) => {
-   setIsChecked(event.target.checked);
+   dispatch(markAsDone({
+      id:id,
+   }));
  };
 
  const {attributes, listeners, setNodeRef, transform, transition} = useSortable({id: id,});
@@ -20,7 +26,7 @@ function EachTodo({id, title, isEditing}) {
   borderRadius: "8px",
   padding: "12px",
   boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-  background: isChecked
+  background: isDone
   ? "linear-gradient(to right, #2E7D32, #81C784)" // Darker green for contrast
   : "linear-gradient(to right, #4A5568, #A0AEC0)", // More professional gray gradient
  }
@@ -41,7 +47,7 @@ const handlePointerDown = (event) => {
     }
 
   const handleEditClick = () =>{
-    dispatch(toggleEdit({
+    dispatch(enableEdit({
       id: id
     }))
   }
@@ -56,7 +62,7 @@ const handlePointerDown = (event) => {
         >
          <input 
             type='checkbox' 
-            checked={isChecked} 
+            checked={isDone} 
             onChange={handleCheckboxChange}  
             onPointerDown={handlePointerDown} 
             data-no-dnd="true"
@@ -64,12 +70,12 @@ const handlePointerDown = (event) => {
           />
           <h3 className='flex-1 m-1 whitespace-pre-wrap break-words overflow-auto max-h-60 mb-4 sm:mb-0'
            style={{
-            textDecoration: isChecked ? 'line-through' : 'none',
+            textDecoration: isDone ? 'line-through' : 'none',
             color: 'black'
            }}
            >{title}</h3>
            {
-            isChecked ? 
+            isDone ? 
             <p className='text-xl  text-gray-700 font-bold m-2'>Completed</p>
             :
             <div className='flex gap-2 ml-1'>

@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import EachTodo from '../EachTodo/EachTodo'
 import { DndContext, closestCenter } from "@dnd-kit/core";  // The list of elements where we want to apply DND functionality. We have to wrap that list in dnd context. "closestCenter" helps to determine where the item has to be dropped (closest place).
@@ -24,6 +24,14 @@ function TodosList() {
       dispatch({ type: "ashish/reorderTodos", payload: updatedTodos });
     }
   }
+
+  // Fetch todos from localStorage when the component mounts
+  useEffect(() => {
+    const savedTodos = localStorage.getItem("todos");
+    if (savedTodos) {
+      dispatch({ type: "ashish/setTodos", payload: JSON.parse(savedTodos) });
+    }
+  }, [dispatch]);
 
 
   return (
