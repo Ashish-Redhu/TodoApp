@@ -33,9 +33,8 @@ function TodosList() {
     }
   }, [dispatch]);
 
-
   return (
-    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <SortableContext items={todos.map((todo) => todo.id)} strategy={verticalListSortingStrategy}>
         <div>
           {
