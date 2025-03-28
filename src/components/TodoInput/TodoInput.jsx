@@ -67,7 +67,7 @@ function TodoInput() {
               /> */}
 
           <textarea 
-            className="appearance-none bg-transparent w-full md:w-96 lg:w-[500px] text-gray-400 py-1 px-2 leading-tight focus:outline-none resize-none overflow-x-hidden min-h-[3rem] max-h-[12rem]"
+            className="appearance-none bg-transparent w-full md:w-96 lg:w-[500px] text-gray-300 text-xl py-1 px-2 leading-tight focus:outline-none resize-none overflow-x-hidden min-h-[3rem] max-h-[12rem]"
             placeholder="Enter todo..." 
             aria-label="Todo" 
             value={title}  

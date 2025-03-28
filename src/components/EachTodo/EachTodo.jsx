@@ -17,7 +17,12 @@ function EachTodo({id, title, isEditing}) {
  const style = {
   transform: CSS.Transform.toString(transform),
   transition,
-  backgroundColor: isChecked ? '#81C784' : '#a0aec0',
+  borderRadius: "8px",
+  padding: "12px",
+  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+  background: isChecked
+  ? "linear-gradient(to right, #2E7D32, #81C784)" // Darker green for contrast
+  : "linear-gradient(to right, #4A5568, #A0AEC0)", // More professional gray gradient
  }
 
  // Prevent dragging when clicking buttons or checkboxes
@@ -49,7 +54,14 @@ const handlePointerDown = (event) => {
         className='flex flex-col sm:flex-row justify-between items-center p-2 rounded-md w-full break-words overflow-auto bg-gray-500 shadow-md mb-2'
          style={style}
         >
-         <input type='checkbox' checked={isChecked} onChange={handleCheckboxChange}  onPointerDown={handlePointerDown} data-no-dnd="true"/>
+         <input 
+            type='checkbox' 
+            checked={isChecked} 
+            onChange={handleCheckboxChange}  
+            onPointerDown={handlePointerDown} 
+            data-no-dnd="true"
+            className="w-3 h-3 accent-green-500 cursor-pointer transition-all"
+          />
           <h3 className='flex-1 m-1 whitespace-pre-wrap break-words overflow-auto max-h-60 mb-4 sm:mb-0'
            style={{
             textDecoration: isChecked ? 'line-through' : 'none',
@@ -58,11 +70,23 @@ const handlePointerDown = (event) => {
            >{title}</h3>
            {
             isChecked ? 
-            <p className='text-sm  text-gray-700 font-bold'>Completed</p>
+            <p className='text-xl  text-gray-700 font-bold m-2'>Completed</p>
             :
             <div className='flex gap-2 ml-1'>
-            { isEditing ? "Editing" : <button className='px-3 py-1 !bg-blue-500 text-white rounded-md !hover:bg-blue-600' onClick={handleEditClick} onPointerDown={handlePointerDown} data-no-dnd="true">Edit</button>} 
-            <button className='px-3 py-1 !bg-red-500 text-white rounded-md !hover:bg-red-600' onClick={handleDeleteClick} onPointerDown={handlePointerDown} data-no-dnd="true">Delete</button>
+            { isEditing ? "Editing" : 
+              <button className='px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-900 transition-all duration-300 shadow-md' 
+                onClick={handleEditClick} 
+                onPointerDown={handlePointerDown} 
+                data-no-dnd="true">
+              Edit</button>} 
+            
+            <button 
+              className='px-4 py-2 bg-gradient-to-r from-red-600 to-red-800 text-white font-semibold rounded-lg hover:from-red-700 hover:to-red-900 transition-all duration-300 shadow-md' 
+              onClick={handleDeleteClick} 
+              onPointerDown={handlePointerDown} 
+              data-no-dnd="true"
+              >
+              Delete</button>
           </div>
 
            }
