@@ -86,7 +86,11 @@ const todoSlice = createSlice({
                 }
             } 
             // console.log(state.gisEditing);
+        },
+        reorderTodos: (state, action) =>{
+            state.todos = action.payload;
         }
+
     }
 })
 

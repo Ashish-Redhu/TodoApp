@@ -23,3 +23,7 @@ function App() {
 }
 
 export default App
+
+
+// DND implementation.
+// https://chatgpt.com/share/67e68fba-650c-800c-a6a2-9e1dc0a9a1b0
