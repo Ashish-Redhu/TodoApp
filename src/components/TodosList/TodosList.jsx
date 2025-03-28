@@ -15,7 +15,7 @@ function TodosList() {
 
   const handleDragEnd = (event) => {
     const { active, over } = event; // active: the item that is being dragged, over: the item that is being hovered over.
-    if(active.id !== over.id) { // Means we will do something if element is dropped somewhere else from it's starting position. 
+    if(active?.id && over?.id && active.id !== over.id) { // Means we will do something if element is dropped somewhere else from it's starting position. 
       const oldIndex = todos.findIndex((todo) => todo.id === active.id); 
       const newIndex = todos.findIndex((todo) => todo.id === over.id);
 
@@ -35,7 +35,7 @@ function TodosList() {
 
 
   return (
-    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <SortableContext items={todos.map((todo) => todo.id)} strategy={verticalListSortingStrategy}>
         <div>
           {
